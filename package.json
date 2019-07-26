@@ -23,6 +23,7 @@
   "homepage": "https://github.com/krewi1/bobril-hook-testing#readme",
   "dependencies": {
     "bobril": "^11.6.0",
+    "bobril-build": "^2.2.0",
     "typescript": "^3.5.3"
   }
 }
