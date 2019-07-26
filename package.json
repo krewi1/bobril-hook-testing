@@ -1,0 +1,28 @@
+{
+  "name": "bobril-hook-testing",
+  "version": "0.0.1",
+  "description": "Library for testing bobril hooks",
+  "main": "./src/index.tsx",
+  "scripts": {
+    "test": "bb test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krewi1/bobril-hook-testing.git"
+  },
+  "keywords": [
+    "bobril",
+    "hooks",
+    "test"
+  ],
+  "author": "p.kratochvil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krewi1/bobril-hook-testing/issues"
+  },
+  "homepage": "https://github.com/krewi1/bobril-hook-testing#readme",
+  "dependencies": {
+    "bobril": "^11.6.0",
+    "typescript": "^3.5.3"
+  }
+}
