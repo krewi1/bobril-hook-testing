@@ -4,7 +4,7 @@
   "description": "Library for testing bobril hooks",
   "main": "./src/index.tsx",
   "scripts": {
-    "test": "bb test"
+    "test": "bb test -o junitTestResult.xml"
   },
   "repository": {
     "type": "git",
