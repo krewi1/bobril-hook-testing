@@ -1,11 +1,13 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: bobril/build:0.80.0
+
 jobs:
-  build:
-    docker:
-      - image: bobril/build:0.80.0
-
-    working_directory: ~/repo
-
+  test:
+    <<: *defaults
     steps:
       - checkout
 
@@ -16,11 +18,33 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
+      - run: npm test
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
 
-      # run tests!
-      - run: npm test
+      deploy:
+        <<: *defaults
+        steps:
+          - attach_workspace:
+              at: ~/repo
+          - run:
+              name: Authenticate with registry
+              command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+          - run:
+              name: Publish package
+              command: npm publish
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+      - deploy:
+          requires:
+            - test
