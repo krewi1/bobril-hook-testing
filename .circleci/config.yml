@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.9.0
+      - image: bobril/build:0.80.0
 
     working_directory: ~/repo
 
