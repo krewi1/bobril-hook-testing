@@ -1,0 +1,6 @@
+.circleci
+.idea
+node_modules
+spec
+.gitignore
+package-lock.json
