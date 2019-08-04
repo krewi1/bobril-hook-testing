@@ -1,10 +1,10 @@
 {
   "name": "bobril-hook-testing",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Library for testing bobril hooks",
   "main": "./src/index.tsx",
   "scripts": {
-    "test": "bb test -o junitTestResult.xml"
+    "test": "bb test"
   },
   "repository": {
     "type": "git",
