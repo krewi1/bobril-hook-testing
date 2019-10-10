@@ -1,6 +1,6 @@
 {
   "name": "bobril-hook-testing",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Library for testing bobril hooks",
   "main": "./src/index.tsx",
   "scripts": {

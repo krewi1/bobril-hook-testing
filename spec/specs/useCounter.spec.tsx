@@ -1,4 +1,4 @@
-import { clean, renderHook, rerender } from "../../src/index";
+import { clean, renderHook } from "../../src/index";
 import { useCounter } from "../test_hooks/useCounter";
 
 describe("useCounter", () => {
@@ -8,7 +8,6 @@ describe("useCounter", () => {
         expect(container.currentValue.count).toBe(0);
 
         container.currentValue.increment();
-        rerender();
         expect(container.currentValue.count).toBe(1);
     });
 
@@ -17,8 +16,8 @@ describe("useCounter", () => {
 
         expect(container.currentValue.count).toBe(6);
         container.currentValue.increment();
-        rerender();
         expect(container.currentValue.count).toBe(7);
     });
+
     afterEach(() => clean());
 });
