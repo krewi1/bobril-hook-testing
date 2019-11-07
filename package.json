@@ -1,6 +1,6 @@
 {
   "name": "bobril-hook-testing",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Library for testing bobril hooks",
   "main": "./src/index.tsx",
   "scripts": {
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/krewi1/bobril-hook-testing#readme",
   "dependencies": {
-    "bobril": "^11.6.0",
-    "bobril-build": "^2.2.0",
-    "typescript": "^3.5.3"
+    "bobril": "*",
+    "bobril-build": "*",
+    "typescript": "*"
   }
 }

@@ -1,6 +1,6 @@
 .circleci
 .idea
-node_modules
-spec
-.gitignore
+tsconfig.json
+yarn.lock
 package-lock.json
+spec/
