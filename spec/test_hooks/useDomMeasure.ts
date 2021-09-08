@@ -9,7 +9,7 @@ export interface MeasuredBox {
     height: number;
 }
 
-export function useMeter(ref: {current: b.IBobrilCacheNode}): MeasuredBox {
+export function useMeter(ref: { current: b.IBobrilCacheNode | undefined }): MeasuredBox {
     let [currentBox, setCurrentBox] = b.useState<MeasuredBox>({
         left: 0,
         top: 0,
