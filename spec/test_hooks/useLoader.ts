@@ -16,9 +16,11 @@ export function useLoaderAsync<T>(defaultValue: T, load: () => Promise<T>): [T, 
 }
 
 async function handleAsyncLoad<T>(load: () => Promise<T>, setState: (value: T | ((value: T) => T)) => void, setLoading: (value: boolean | ((value: boolean) => boolean)) => void): Promise<void> {
-    await handleAsyncLoadInner(load, setState, setLoading);
+    await handleAsyncLoadInner(load, setState);
     setLoading(false);
 }
-async function handleAsyncLoadInner<T>(load: () => Promise<T>, setState: (value: T | ((value: T) => T)) => void, setLoading: (value: boolean | ((value: boolean) => boolean)) => void): Promise<void> {
+
+// To simulate wrapping in another Promise, which cannot be awaited in test directly - afterEffect must be used
+async function handleAsyncLoadInner<T>(load: () => Promise<T>, setState: (value: T | ((value: T) => T)) => void): Promise<void> {
     setState(await load());
 }

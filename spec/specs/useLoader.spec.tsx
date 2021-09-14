@@ -25,7 +25,7 @@ describe("useLoader", () => {
 
         await promise;
         rerender();
-        await afterEffect();
+        await afterEffect(); // wait for render - see useLoaderAsync
         rerender();
 
         expect(container.currentValue[0].value).toBe("loaded async");
