@@ -6,8 +6,10 @@ type Box<T> = {
     value: T
 }
 
+export type Ref<T> = { current: T | undefined };
+
 export interface IHookRender<T, P extends any[]> {
-    bobrilNode: {current: b.IBobrilCacheNode};
+    bobrilNode: Ref<b.IBobrilCacheNode>;
     element: Element;
     timesRerendered: () => number;
     currentValue: T extends BoxedTypes ? Box<T> : T;
@@ -23,13 +25,13 @@ export function renderHookInsideParent<T, P extends any[]>(hook: (...args: P) =>
     let currentValue: T = {} as T;
     let deps = dependencies;
     let timesRerendered: number = 0;
-    let cacheNode: {current: b.IBobrilCacheNode} = {current: null};
+    let cacheNode: Ref<b.IBobrilCacheNode> = { current: undefined };
     let domNode: HTMLDivElement;
     function Component() {
         const result = hook(...deps);
         Object.assign(currentValue, typeof result === "object" ? result : {value: result});
         timesRerendered++;
-        return <div ref={cacheNode}>test</div>
+        return <div ref={cacheNode}>test{JSON.stringify(result)}</div>
     }
 
     b.init(() => {
@@ -47,7 +49,7 @@ export function renderHookInsideParent<T, P extends any[]>(hook: (...args: P) =>
             deps = dependencies;
             rerender();
         }
-    }
+    };
 }
 
 export function rerender() {
@@ -57,4 +59,8 @@ export function rerender() {
 
 export function clean() {
     b.removeRoot("0");
+}
+
+export function afterEffect(): Promise<void> {
+    return new Promise<void>((resolve) => b.asap(resolve));
 }
