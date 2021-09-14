@@ -1,5 +1,5 @@
 import * as b from "bobril/index";
-import { clean, renderHook } from "../../src";
+import { clean, Ref, renderHook } from "../../src";
 import { useMeter } from "../test_hooks/useDomMeasure";
 
 describe("domMeter", () => {
@@ -12,7 +12,7 @@ describe("domMeter", () => {
             width: 2,
             height: 6
         };
-        const container = renderHook(useMeter, {current: undefined} as { current: b.IBobrilCacheNode | undefined });
+        const container = renderHook(useMeter, { current: undefined } as Ref<b.IBobrilCacheNode>);
         spyOn(container.element, "getBoundingClientRect").and.returnValue(measureContainer);
         container.changeDependencies(container.bobrilNode);
         expect(container.currentValue.bottom).toBe(8);

@@ -1,4 +1,5 @@
 import * as b from "bobril";
+import { Ref } from "../../src";
 
 export interface MeasuredBox {
     bottom: number;
@@ -9,7 +10,7 @@ export interface MeasuredBox {
     height: number;
 }
 
-export function useMeter(ref: { current: b.IBobrilCacheNode | undefined }): MeasuredBox {
+export function useMeter(ref: Ref<b.IBobrilCacheNode>): MeasuredBox {
     let [currentBox, setCurrentBox] = b.useState<MeasuredBox>({
         left: 0,
         top: 0,

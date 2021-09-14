@@ -24,6 +24,7 @@ describe("useLoader", () => {
         expect(container.currentValue[1]).toBeTruthy();
 
         await promise;
+        rerender();
         await afterEffect();
         rerender();
 

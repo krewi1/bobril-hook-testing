@@ -6,8 +6,10 @@ type Box<T> = {
     value: T
 }
 
+export type Ref<T> = { current: T | undefined };
+
 export interface IHookRender<T, P extends any[]> {
-    bobrilNode: { current: b.IBobrilCacheNode | undefined };
+    bobrilNode: Ref<b.IBobrilCacheNode>;
     element: Element;
     timesRerendered: () => number;
     currentValue: T extends BoxedTypes ? Box<T> : T;
@@ -23,7 +25,7 @@ export function renderHookInsideParent<T, P extends any[]>(hook: (...args: P) =>
     let currentValue: T = {} as T;
     let deps = dependencies;
     let timesRerendered: number = 0;
-    let cacheNode: {current: b.IBobrilCacheNode | undefined} = {current: undefined};
+    let cacheNode: Ref<b.IBobrilCacheNode> = { current: undefined };
     let domNode: HTMLDivElement;
     function Component() {
         const result = hook(...deps);

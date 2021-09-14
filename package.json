@@ -21,9 +21,11 @@
     "url": "https://github.com/krewi1/bobril-hook-testing/issues"
   },
   "homepage": "https://github.com/krewi1/bobril-hook-testing#readme",
-  "dependencies": {
-    "bobril": "*",
+  "devDependencies": {
     "bobril-build": "*",
     "typescript": "*"
+  },
+  "dependencies": {
+    "bobril": "*"
   }
 }
