@@ -29,7 +29,7 @@ export function renderHookInsideParent<T, P extends any[]>(hook: (...args: P) =>
         const result = hook(...deps);
         Object.assign(currentValue, typeof result === "object" ? result : {value: result});
         timesRerendered++;
-        return <div ref={cacheNode}>test</div>
+        return <div ref={cacheNode}>test{JSON.stringify(result)}</div>
     }
 
     b.init(() => {
@@ -57,4 +57,8 @@ export function rerender() {
 
 export function clean() {
     b.removeRoot("0");
+}
+
+export function afterEffect(): Promise<void> {
+    return new Promise<void>((resolve) => b.asap(resolve));
 }
