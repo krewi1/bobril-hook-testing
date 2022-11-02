@@ -1,10 +1,10 @@
 import * as b from "bobril";
 
-type BoxedTypes = string | undefined | null | number | boolean | Function;
-
 type Box<T> = {
     value: T
 }
+
+type CurrentValue<T> = T extends {} ? T : Box<T>
 
 export type Ref<T> = { current: T | undefined };
 
@@ -12,17 +12,16 @@ export interface IHookRender<T, P extends any[]> {
     bobrilNode: Ref<b.IBobrilCacheNode>;
     element: Element;
     timesRerendered: () => number;
-    currentValue: T extends BoxedTypes ? Box<T> : T;
+    currentValue: CurrentValue<T>;
     changeDependencies(...dependencies: P): void;
 }
-
 
 export function renderHook<T, P extends any[]>(hook: (...args: P) => T, ...dependencies: P): IHookRender<T, P> {
     return renderHookInsideParent(hook, null, ...dependencies);
 }
 
 export function renderHookInsideParent<T, P extends any[]>(hook: (...args: P) => T, Parent: b.IComponentFactory<any> | null,  ...dependencies: P): IHookRender<T, P> {
-    let currentValue: T = {} as T;
+    let currentValue = {} as CurrentValue<T>;
     let deps = dependencies;
     let timesRerendered: number = 0;
     let cacheNode: Ref<b.IBobrilCacheNode> = { current: undefined };
