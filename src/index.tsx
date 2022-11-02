@@ -17,15 +17,11 @@ export interface IHookRender<T, P extends any[]> {
 }
 
 
-export function renderHook<T extends {}, P extends any[]>(hook: (...args: P) => T | void, ...dependencies: P): IHookRender<T, P> {
+export function renderHook<T, P extends any[]>(hook: (...args: P) => T, ...dependencies: P): IHookRender<T, P> {
     return renderHookInsideParent(hook, null, ...dependencies);
 }
 
-export function renderHookInsideParent<T extends {}, P extends any[]>(
-    hook: (...args: P) => T | void,
-    Parent: b.IComponentFactory<any> | null,
-    ...dependencies: P
-): IHookRender<T, P> {
+export function renderHookInsideParent<T, P extends any[]>(hook: (...args: P) => T, Parent: b.IComponentFactory<any> | null,  ...dependencies: P): IHookRender<T, P> {
     let currentValue: T = {} as T;
     let deps = dependencies;
     let timesRerendered: number = 0;
@@ -33,12 +29,9 @@ export function renderHookInsideParent<T extends {}, P extends any[]>(
     let domNode: HTMLDivElement;
     function Component() {
         const result = hook(...deps);
-        Object.assign(
-            currentValue,
-            typeof result === "object" ? result : { value: result }
-        );
+        Object.assign(currentValue, typeof result === "object" ? result : {value: result});
         timesRerendered++;
-        return <div ref={cacheNode}>test{JSON.stringify(result)}</div>;
+        return <div ref={cacheNode}>test{JSON.stringify(result)}</div>
     }
 
     b.init(() => {
